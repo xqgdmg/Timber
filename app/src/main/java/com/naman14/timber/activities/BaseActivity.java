@@ -29,6 +29,7 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -64,6 +65,9 @@ import java.util.ArrayList;
 
 import static com.naman14.timber.MusicPlayer.mService;
 
+/*
+ * ATE 应该是和主题和字体色调相关的东西
+ */
 public class BaseActivity extends ATEActivity implements ServiceConnection, MusicStateListener {
 
     private final ArrayList<MusicStateListener> mMusicStateListener = new ArrayList<>();
@@ -120,6 +124,8 @@ public class BaseActivity extends ATEActivity implements ServiceConnection, Musi
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        Log.e("chris","ActivityName==" + getClass().getSimpleName());
+
         mToken = MusicPlayer.bindToService(this, this);
 
         mPlaybackStatus = new PlaybackStatus(this);
@@ -173,6 +179,7 @@ public class BaseActivity extends ATEActivity implements ServiceConnection, Musi
             mToken = MusicPlayer.bindToService(this, this);
         }
         onMetaChanged();
+
         super.onResume();
     }
 
